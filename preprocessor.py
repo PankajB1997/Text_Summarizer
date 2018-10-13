@@ -2,16 +2,18 @@ import os
 import sys
 import csv
 import pickle
-from pprint import pprint
 from stopwords import stopwords
 import unicodedata
-import sys
+import re
 
 tbl = dict.fromkeys(i for i in range(sys.maxunicode)
                       if unicodedata.category(chr(i)).startswith('P'))
 
 def removePunctuations(sentence):
     return sentence.translate(tbl)
+
+def removeExtraSpaces(sentence):
+    return re.sub(' +',' ',sentence)
 
 def removeStopwords(sentence):
     filtered_sentence = ""
@@ -32,6 +34,7 @@ def cleanSentence(sentence):
     sentence = retainAsciiOnly(sentence)
     sentence = removeStopwords(sentence)
     sentence = removePunctuations(sentence)
+    sentence = removeExtraSpaces(sentence)
     return sentence
 
 data = pickle.load(open(os.path.join('news', 'data.pkl'), 'rb'))
