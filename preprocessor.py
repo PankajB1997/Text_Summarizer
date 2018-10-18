@@ -32,7 +32,7 @@ def retainAsciiOnly(sentence):
 def cleanSentence(sentence):
     sentence = sentence.strip().lower()
     sentence = retainAsciiOnly(sentence)
-    sentence = removeStopwords(sentence)
+    # sentence = removeStopwords(sentence)
     sentence = removePunctuations(sentence)
     sentence = removeExtraSpaces(sentence)
     return sentence
